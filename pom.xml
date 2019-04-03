@@ -219,10 +219,10 @@
     
       <profiles>
           <profile>
-            <id>release</id>
+            <id>release-mhus</id>
             <activation>
               <property>
-                <name>performRelease</name>
+                <name>performMhusRelease</name>
                 <value>true</value>
               </property>
             </activation>
