@@ -413,7 +413,7 @@ public class CmdLiferayMhus implements CommandProvider {
 			}
 			while (res.next()) {
 				if (idxName == null || idxName.equals(res.getString("INDEX_NAME"))) {
-					ConsoleTable.Row r = out.addRow();
+				    ConsoleTable.Row r = out.addRow();
 					for (int i = 0; i < resMeta.getColumnCount(); i++)
 							r.add(String.valueOf(res.getObject(i+1)));
 				}
