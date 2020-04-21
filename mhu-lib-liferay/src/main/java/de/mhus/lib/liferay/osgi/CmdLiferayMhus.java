@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.service.VirtualHostLocalServiceUtil;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import de.mhus.lib.core.MApi;
 import de.mhus.lib.core.MCast;
@@ -276,7 +277,8 @@ public class CmdLiferayMhus implements CommandProvider {
 		}
 	}
 	
-	@Transactional
+	@SuppressWarnings("deprecation")
+    @Transactional
 	public Object _user_set(CommandInterpreter ci) throws PortalException {
 		try {
 			String virtualHost = ci.nextArgument();
@@ -334,7 +336,13 @@ public class CmdLiferayMhus implements CommandProvider {
 						ci.println("Unknown parameter: " + key);
 					}
 					
-				}
+				} else {
+				    if (pair.equals("enable"))
+				        UserLocalServiceUtil.updateStatus(u.getUserId(), WorkflowConstants.STATUS_APPROVED);
+				    else
+				    if (pair.equals("disable"))
+				        UserLocalServiceUtil.updateStatus(u.getUserId(), WorkflowConstants.STATUS_INACTIVE);
+			    }
 				
 				
 			}
